@@ -20,16 +20,20 @@ public class Car {
     private String number;
 
 
-    //Realization one to many
-    private Set<Car> car = new HashSet <Car> ();
-
-    @OneToMany(mappedBy = "car",cascade = CascadeType.ALL,orphanRemoval = true)
-
-    public Set<Car> getCar(){ return this.car; }
-    public void setCar(Set<Car> car) {}
-    public void removeCar(Car car) { getCar().remove(car); }
+    //Realization one to many sub table Event
 
 
+    @OneToMany(mappedBy = "car",cascade = CascadeType.ALL,
+            orphanRemoval = true,fetch = FetchType.LAZY,targetEntity = Event.class)
+
+    private Set <Event> event = new HashSet <Event> ();
+    public Set <Event> getEvent() {
+        return this.event;
+    }
+
+    public void setEvent(Set<Event> event) {
+        this.event = event;
+    }
     //end of realization
 
 
@@ -56,4 +60,6 @@ public class Car {
     public void setNumber(String number) {
         this.number = number;
     }
+
+
 }

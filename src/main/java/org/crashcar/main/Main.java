@@ -7,19 +7,16 @@ import org.crashcar.pojo.Event;
 
 import org.hibernate.Session;
 
-import org.hibernate.query.Query;
-
-import javax.management.remote.rmi._RMIConnection_Stub;
-import java.time.Instant;
+//import javax.management.remote.rmi._RMIConnection_Stub;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
-import java.util.Locale;
 
 
 public class Main {
     public static void main(String[] args) {
-            try (Session session = TestUtil.getSession()) {
+
+
+            try (Session session = SessionUtil.getSession()) {
 
                 session.beginTransaction();
 

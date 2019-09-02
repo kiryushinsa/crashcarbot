@@ -6,7 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 
-public class TestUtil {
+public class SessionUtil {
 
     private static final SessionFactory session;
 

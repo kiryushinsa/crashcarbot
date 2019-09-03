@@ -1,11 +1,15 @@
 package org.crashcar.main;
 
 
+import org.crashcar.botapi.Bot;
 import org.crashcar.pojo.Car;
 import org.crashcar.pojo.Event;
 
 
 import org.hibernate.Session;
+import org.telegram.telegrambots.ApiContextInitializer;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 //import javax.management.remote.rmi._RMIConnection_Stub;
 import java.time.LocalDate;
@@ -15,36 +19,27 @@ import java.time.LocalTime;
 public class Main {
     public static void main(String[] args) {
 
+        ApiContextInitializer.init();
 
-            try (Session session = SessionUtil.getSession()) {
+        TelegramBotsApi telegramBotsApi= new TelegramBotsApi();
 
-                session.beginTransaction();
+        try{
+            telegramBotsApi.registerBot(new Bot());
+        }
+        catch (TelegramApiException e) {e.printStackTrace();}
 
-                Car car = new Car();
-                car.setNumber("x4939но111");
-                car.setModel("Mazda Bongo");
-                session.save(car);
-
-                car.getClass();
-                String s="ldasda";
-                Event event= new Event();
-                event.setUser(s);
-                event.setCar(car);
-                event.setDate(LocalDate.parse("2019-05-05"));
-                event.setTime(LocalTime.parse("12:55:00"));
-                car.getEvent().add(event);//callback empty event from main table car
-                // end set new dependency from object event
-
-                session.save(event);
-
-                session.getTransaction().commit();}
-
-            catch (Throwable cause) { cause.printStackTrace(); }
+        System.out.println("Запуск прошел успешно");
 
 
-
-
-
+//            try (Session session = SessionUtil.getSession()) {
+//
+//                session.beginTransaction();
+//
+//
+//
+//                session.getTransaction().commit();}
+//
+//            catch (Throwable cause) { cause.printStackTrace(); }
 
     }
 }
